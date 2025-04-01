@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [showMacOptions, setShowMacOptions] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
       {/* Navigation */}
@@ -172,17 +177,40 @@ export default function Home() {
               </svg>
               Download for Windows
             </a>
-            <a
-              href="https://drive.google.com/file/d/1pdgAUBg883VM1O7FwRD1-gqJqDqQBmv7/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-white text-blue-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download for macOS
-            </a>
+            <div className="relative">
+              <button
+                onClick={() => setShowMacOptions(!showMacOptions)}
+                className="flex items-center justify-center gap-2 bg-white text-blue-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors w-full"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download for macOS 
+                <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform ${showMacOptions ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {showMacOptions && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg overflow-hidden flex flex-col z-10">
+                  <a
+                    href="https://drive.google.com/file/d/1pdgAUBg883VM1O7FwRD1-gqJqDqQBmv7/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 hover:bg-gray-100 transition-colors text-blue-700"
+                  >
+                    Apple Silicon (M1/M2/M3)
+                  </a>
+                  <a
+                    href="https://drive.google.com/file/d/14rpx2vHLuMTcuQYVJXYYrZ9h_yoOEr4-/view"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 hover:bg-gray-100 transition-colors text-blue-700"
+                  >
+                    Intel Chip
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
