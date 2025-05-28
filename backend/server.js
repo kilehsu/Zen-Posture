@@ -1,3 +1,6 @@
+# AI Optimization Applied: Fixed 1 database issues
+# Issues addressed: UNBOUNDED_QUERY
+
 // Suppress the punycode deprecation warning
 process.removeAllListeners('warning');
 
@@ -553,7 +556,7 @@ app.get('/api/debug/posture-sessions/:hwid', async (req, res) => {
 // Get all users endpoint
 app.get('/api/users', async (req, res) => {
     try {
-        const users = await User.find({})
+        const users = await User.find({}).limit(50)
             .select('-__v') // Exclude the version key
             .sort({ createdAt: -1 }); // Sort by creation date, newest first
         
